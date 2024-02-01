@@ -45,7 +45,7 @@
                                 </svg>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/admin/dashboard">Admin</a></li>
+                                <li><a class="dropdown-item" href="{{route('admin.dashboard')}}">Admin</a></li>
                                 <li><a class="dropdown-item" href="#">Thông tin</a></li>
                                 <li><a class="dropdown-item" href="{{ route('bill_list') }}">Đơn hàng</a></li>
                                 <li>
