@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,10 @@ Route::prefix('categories')->group(function(){
 
     
 });
+Route::get('dang_ki',[AuthController::class,'showDangKi']);
+Route::post('dang_ki',[AuthController::class,'dang_ki'])->name('dang_ki');
+Route::get('login',[AuthController::class,'showLoginForm'])->name('login');
+Route::post('login',[AuthController::class,'login'])->name('dang_nhap');
 // Route::post('/unicode',function(){
 //     return 'Method post của form';
 // });
