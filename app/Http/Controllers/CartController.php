@@ -36,14 +36,14 @@ class CartController extends Controller
         if($currentObject !== false){
            
              /** @disregard [OPTIONAL CODE] [OPTIONAL DESCRIPTION] */
-            $request->session()->increment("key.{$currentObject}.quantity",$incrementBy = 1);
-            $total_price = ($cartSession[$currentObject]['quantity'] + 1) * $cartSession[$currentObject]['price'];
+            $request->session()->increment("key.{$currentObject}.quantity",$incrementBy = $request->quantity);
+            $total_price = ($cartSession[$currentObject]['quantity'] + $request->quantity) * $cartSession[$currentObject]['price'];
             $request->session()->put("key.{$currentObject}.total",$total_price);
             
             return redirect()->route('cart');
         }
 
-        $objectProduct['quantity'] = 1;
+        $objectProduct['quantity'] = $request->quantity;
         $objectProduct['total'] = $objectProduct['quantity'] * $objectProduct['price'];
         /** @disregard [OPTIONAL CODE] [OPTIONAL DESCRIPTION] */
         $request->session()->push('key',$objectProduct);

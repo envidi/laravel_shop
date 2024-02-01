@@ -38,6 +38,11 @@ class Product extends Model
 
         return $productDetail;
     }
+    public function getSingleProduct($id){
+        $productDetail = DB::table($this->table)->select('products.*','categories.name as category_name')->where('products.id','=',$id)->join('categories','products.category_id','=','categories.id')->get();
+
+        return $productDetail;
+    }
     public function updateProduct($data,$id){
 
         $data[]  = $id;

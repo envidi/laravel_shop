@@ -1,5 +1,13 @@
 
 const row = document.querySelector(".row");
+const inputQuantityCarts = document.querySelectorAll('.input_quantity')
+
+inputQuantityCarts.forEach((inputQuantityItem,index)=>{
+    console.log(inputQuantityItem)
+    inputQuantityItem.addEventListener("input",function(e){
+        console.log(e.target.value)
+    })
+})
 
 row.addEventListener("click", function (e) {
     const summary_total = document.querySelector('.summary_total')

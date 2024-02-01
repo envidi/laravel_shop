@@ -23,6 +23,13 @@ class ProductController extends Controller
         
         return view('clients.homeListProduct',compact('productList'));
     }
+    public function getProductById(Request $request)
+    {   
+        $product = $this->products->getSingleProduct($request->id);
+        $singleProduct = $product[0];
+        
+        return view('clients.productDetail',compact('singleProduct'));
+    }
 
     public function addProduct(Request $request)
     {

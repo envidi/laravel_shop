@@ -6,8 +6,8 @@
                 <div class="col-md-8 cart">
                     <div class="title">
                         <div class="row">
-                            <div class="col"><h4><b>Shopping Cart {{ is_array($value) ? count($value): null}}</b></h4></div>
-                            <div class="col align-self-center text-right text-muted">3 items</div>
+                            <div class="col"><h4><b>Shopping Cart </b></h4></div>
+                            <div class="col align-self-center text-right text-muted">{{ is_array($value) ? count($value): null}} items</div>
                         </div>
                     </div>   
                     @if (is_array($value))
@@ -52,7 +52,7 @@
                     <div><h5 class="h5_cart"><b>Summary</b></h5></div>
                     <hr>
                     <div class="row">
-                        <div class="col" style="padding-left:0;">ITEMS 3</div>                        
+                        <div class="col" style="padding-left:0;">ITEMS {{ is_array($value) ? count($value): null}}</div>                        
                         &euro;<input type="text" class="col text-right summary_total" value="{{$total_summary}}">
                     </div>
                     <div class="form_cart">

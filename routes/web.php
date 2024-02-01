@@ -21,15 +21,15 @@ use App\Http\Controllers\PaymentController;
 
 
 Route::get('/',[HomeController::class , 'index'])->name('home');
+
+
 Route::get('/cart',[CartController::class , 'index'])->name('cart');
 Route::get('/bill',[BillController::class , 'addToBillAndCart'])->name('addBill');
 Route::get('/bill_list',[BillController::class , 'getBill'])->name('bill_list');
 Route::post('/cart',[CartController::class , 'addToCart'])->name('addToCart');
 Route::post('/cart_delete',[CartController::class , 'deleteFromCart'])->name('deleteFromCart');
 Route::post('/create_payment',[PaymentController::class , 'create_payment'])->name('create_payment');
-Route::get('show',function(){
-    return view('form');
-});
+Route::get('/productDetail/{id}',[ProductController::class , 'getProductById'])->name('product_detail');
 Route::prefix('products')->group(function(){
     Route::get('/', [ProductController::class,'index'])->name('products.list');
 
