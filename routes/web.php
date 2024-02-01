@@ -25,6 +25,8 @@ use App\Http\Controllers\UsersController;
 Route::get('/',[HomeController::class , 'index'])->name('home');
 Route::get('/cart',[CartController::class , 'index'])->name('cart');
 Route::get('/bill',[BillController::class , 'addToBillAndCart'])->name('addBill');
+Route::post('/bill_cancle/{id}',[BillController::class , 'cancleBill'])->name('cancleBill');
+Route::get('/bill_delete/{id}',[BillController::class , 'deleteBill'])->name('deleteBill');
 Route::get('/bill_list',[BillController::class , 'getBill'])->name('bill_list');
 Route::post('/cart',[CartController::class , 'addToCart'])->name('addToCart');
 Route::post('/cart_delete',[CartController::class , 'deleteFromCart'])->name('deleteFromCart');
@@ -65,4 +67,9 @@ Route::prefix('admin')->group(function () {
     Route::post('/users/add', [UsersController::class, 'handleAddUser'])->name('handleAddUser');
     Route::get('/users/edit/{id}', [UsersController::class, 'editUser'])->name('users.edit');
     Route::post('/users/edit/{id}', [UsersController::class, 'handleEditUser'])->name('users.handleEdit');
+
+    Route::get('/order', [BillController::class, 'getAllBill'])->name('order.list');
+    Route::get('/order_edit/{id}', [BillController::class, 'editBill'])->name('order.edit');
+    Route::post('/order_edit/{id}', [BillController::class, 'handleEditBill'])->name('order.handleEdit');
+    Route::get('/order_delete/{id}', [BillController::class, 'getAllBill'])->name('order.delete');
 });

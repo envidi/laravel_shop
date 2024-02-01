@@ -43,7 +43,7 @@
                 </a>
             </li>
             <li class="li-hover">
-                <a href="#" class="nav-link text-white">
+                <a href="{{route('order.list')}}" class="nav-link text-white">
                     Orders
                 </a>
             </li>

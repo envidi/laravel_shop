@@ -19,6 +19,13 @@
             <div class="date_bill block_bill">
                 <span class="bill_info_user">Ngày thanh toán </span>: {{$item['created_at']}}
             </div>
+            <form action="{{route('cancleBill',['id'=>$item['id']])}}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger">
+                    Cancle
+                </button>
+            </form>
+            
         </div>
         <table class="table_bill">
             <thead>

@@ -24,6 +24,39 @@ class BillController extends Controller
         }
         return view('clients.bill_list',compact('bill_user'));
     }
+    public function getAllBill(Request $request){
+        $bill_all = $this->bill->getAllBillDB();
+        foreach ($bill_all as $key => $value) {
+            $cartFromBill = $this->cart->listCartDB($value['id'])->toArray();
+            $bill_all[$key]['cartList'] = $cartFromBill;
+        }
+        // dd($bill_all);
+        return view('admin.cart.cartList',compact('bill_all'));
+    }
+    public function editBill($id = 0){
+        $bill_single = $this->bill->getSingleBillDB($id)[0];
+        
+        $array_status = ['Processing','Completed','Cancle'];        
+        return view('admin.cart.cartEdit',compact('bill_single','array_status'));
+    }
+    public function handleEditBill(Request $request){
+        
+        $bill_single = $this->bill->updateStatusBill($request->status, $request->id);
+        
+              
+        return redirect()->route('order.list')->with('msg', 'Cập nhật đơn hàng thành công');
+    }
+    public function cancleBill(Request $request){
+        $this->bill->updateStatusBill('Cancle', $request->id);
+        
+        return redirect()->route('bill_list')->with('msg', 'Hủy đơn hàng thành công');
+    }
+    public function deleteBill($id){
+        $this->cart->deleteCartDb($id);
+        $this->bill->deleteBillDB($id);
+        return redirect()->route('order.list')->with('msg', 'Xóa đơn hàng thành công');
+    }
+    
     public function addToBillAndCart(Request $request)
     {   
         if($request->query('vnp_ResponseCode') == "00"){
