@@ -34,11 +34,11 @@ class ProductController extends Controller
         return view('admin.productList', compact('productList'));
     }
     public function getProductById(Request $request)
-    {   
+    {
         $product = $this->products->getSingleProduct($request->id);
         $singleProduct = $product[0];
-        
-        return view('clients.productDetail',compact('singleProduct'));
+
+        return view('clients.productDetail', compact('singleProduct'));
     }
 
     public function addProduct(Request $request)
@@ -131,7 +131,21 @@ class ProductController extends Controller
 
         return  redirect()->route('products.edit', ['id' => $id])->with('msg', 'Update successfully');
     }
+
+    // Soft deletes
     public function handleDeleteProduct($id = 0)
+    {
+        if (!empty($id)) {
+            $data = Product::find($id);
+            $data->delete();
+        } else {
+            $msg = 'This link is not exist';
+        }
+        return redirect()->back();
+    }
+
+    // hard deletes
+    public function handleRemoveProduct($id = 0)
     {
 
         if (!empty($id)) {
@@ -151,6 +165,19 @@ class ProductController extends Controller
             $msg = 'This link is not exist';
         }
 
-        return  redirect()->route('products.list')->with('msg', $msg);
+        return back();
+    }
+    public function listProductDeleted(Request $request)
+    {
+        $productList = $this->products->getAllProductsDeleted();
+        return view('admin.productsDeleted', compact('productList'));
+    }
+    public function restore($id)
+    {
+        $product = Product::withTrashed()->findOrFail($id);
+        if (!empty($product)) {
+            $product->restore();
+        }
+        return redirect()->route('products.list')->with('msg', 'Restore product successfully!');
     }
 }

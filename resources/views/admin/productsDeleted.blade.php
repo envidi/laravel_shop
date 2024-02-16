@@ -1,26 +1,13 @@
 @extends('layouts.dashboard')
 @section('content_admin')
     <div class="d-flex flex-column m-3" style="width: 100%">
-        <h1 class="title-list">List product</h1>
+        <h1 class="title-list text-center my-3 text-danger">List product deleted</h1>
         @session('msg')
             <div class="alert alert-warning" role="alert">
                 {{ session('msg') }}
             </div>
         @endsession
-
-        <div class="d-flex justify-content-between">
-            <button type="button" class="btn btn-primary my-3 mx-5" style="width: 10%">
-                <a href={{ route('products.add') }} style="text-decoration: none;color: white">
-                    Add product
-                </a>
-            </button>
-            <button type="button" class="btn btn-danger my-3 mx-5" style="width: 10%">
-                <a href={{ route('products.deleted') }} style="text-decoration: none;color: white">
-                    Products deleted
-                </a>
-            </button>
-        </div>
-        <table class="table table-striped mx-auto text-center" style="width: 90%;">
+        <table class="table table-striped mx-auto text-center mt-5" style="width: 90%;">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -41,15 +28,16 @@
                             <td>{{ $product->price }}</td>
                             <td style="width: 25%">{{ $product->description }}</td>
                             <td style="width: 15%"> <img width="40"
-                                    src="{{ asset('assets/client/images/' . $product->image) }}" alt=""> </td>
+                                    src="{{ asset('assets/client/images/' . $product->image) }}" alt="">
+                            </td>
                             <td>{{ $product->category_name }}</td>
                             <td>
-                                <a class="btn btn-warning" href="{{ route('products.edit', ['id' => $product->id]) }}">
-                                    Edit
+                                <a class="btn btn-warning" href="{{ route('products.restore', $product->id) }}">
+                                    Restore
                                 </a>
                                 <a onclick="return confirm('Are you sure to delete this product?')" class="btn btn-danger"
-                                    href="{{ route('products.handleDelete', ['id' => $product->id]) }}">
-                                    Delete
+                                    href="{{ route('products.hardDelete', ['id' => $product->id]) }}">
+                                    Delete Forever
                                 </a>
                             </td>
                         </tr>

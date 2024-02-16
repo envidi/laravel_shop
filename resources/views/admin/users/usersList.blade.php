@@ -19,9 +19,8 @@
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Create_At</th>
+                    <th scope="col">Created_At</th>
                     <th scope="col">Updated</th>
-                    <th scope="col" colspan="2">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,11 +33,6 @@
                             <td>{{ $users->email }}</td>
                             <td>{{ $users->created_at }}</td>
                             <td>{{ $users->updated_at }}</td>
-                            <td>
-                                <a href="{{ route('users.edit', ['id' => $users->id]) }}">
-                                    <button type="submit" class="btn btn-success">Sửa</button>
-                                </a>
-                            </td>
                         </tr>
                     @endforeach
                 @else
