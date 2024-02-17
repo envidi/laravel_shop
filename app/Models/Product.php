@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $table = 'products';
     // protected $fillable = [
     //     'id',
@@ -21,7 +22,14 @@ class Product extends Model
 
     public function getAllProducts()
     {
-        $products = DB::table($this->table)->select('products.*', 'categories.name as category_name')->join('categories', 'products.category_id', '=', 'categories.id')
+        $products = DB::table($this->table)->select('products.*', 'categories.name as category_name')->join('categories', 'products.category_id', '=', 'categories.id')->whereNull('deleted_at')
+            ->get();
+
+        return $products;
+    }
+    public function getAllProductsDeleted()
+    {
+        $products = DB::table($this->table)->select('products.*', 'categories.name as category_name')->join('categories', 'products.category_id', '=', 'categories.id')->whereNotNull('deleted_at')
             ->get();
 
         return $products;
@@ -36,13 +44,15 @@ class Product extends Model
     {
         DB::insert('INSERT INTO products (name , price , description , image , category_id , created_at) values ( ?, ?, ?, ?,?, ? )', $data);
     }
-    public function getOneProduct($id){
-        $productDetail = DB::select('SELECT * FROM '.$this->table.' WHERE id = ?',[$id]);
+    public function getOneProduct($id)
+    {
+        $productDetail = DB::select('SELECT * FROM ' . $this->table . ' WHERE id = ?', [$id]);
 
         return $productDetail;
     }
-    public function getSingleProduct($id){
-        $productDetail = DB::table($this->table)->select('products.*','categories.name as category_name')->where('products.id','=',$id)->join('categories','products.category_id','=','categories.id')->get();
+    public function getSingleProduct($id)
+    {
+        $productDetail = DB::table($this->table)->select('products.*', 'categories.name as category_name')->where('products.id', '=', $id)->join('categories', 'products.category_id', '=', 'categories.id')->get();
 
         return $productDetail;
     }
