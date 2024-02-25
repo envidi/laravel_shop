@@ -22,7 +22,7 @@
 
 <body>
 
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px; height: 100vh">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px; height: 100vh;position: sticky;top: 0px">
         <a href="/admin/dashboard"
             class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <svg class="bi pe-none me-2" width="40" height="32">
@@ -40,6 +40,11 @@
             <li class="li-hover">
                 <a href="/admin/products" class="nav-link text-white">
                     Products
+                </a>
+            </li>
+            <li class="li-hover">
+                <a href="{{route('admin.categories.list')}}" class="nav-link text-white">
+                    Category
                 </a>
             </li>
             <li class="li-hover">

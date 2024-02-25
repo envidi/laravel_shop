@@ -7,16 +7,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Cart;
 
 
 class ProductController extends Controller
 {
     private $products;
     private $categories;
+    private $cart;
     public function __construct()
     {
         $this->products = new Product();
         $this->categories = new Category();
+        $this->cart = new Cart();
     }
 
     public function index(Request $request)
@@ -28,10 +31,12 @@ class ProductController extends Controller
         return view('admin.dashboard');
     }
     public function listProduct(Request $request)
-    {
+    {   
+        
         $productList = $this->products->getAllProducts();
-
         return view('admin.productList', compact('productList'));
+
+        
     }
     public function getProductById(Request $request)
     {
@@ -136,13 +141,21 @@ class ProductController extends Controller
     public function handleDeleteProduct($id = 0)
     {
         if (!empty($id)) {
-            $data = Product::find($id);
-            $data->delete();
+            $existCart = $this->cart->getCartExistInDB($id);
+            if($existCart === 0 ){
+                $data = Product::find($id);
+                $data->delete();
+            }else{
+                return redirect()->route('products.list')->with('msg', 'Cannot delete product!');
+            }
+            
+            
         } else {
             $msg = 'This link is not exist';
         }
         return redirect()->back();
     }
+
 
     // hard deletes
     public function handleRemoveProduct($id = 0)

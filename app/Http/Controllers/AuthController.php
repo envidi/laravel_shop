@@ -47,9 +47,9 @@ class AuthController extends Controller
         $user_name =$request->name;
 
        DB::table('users')->insert([
-        'user_name' => $user_name,
-    'email' => $email,
-    'password' => $password,
+        'name' => $user_name,
+        'email' => $email,
+        'password' => $password,
 
     ]);
      return redirect()->route("login");

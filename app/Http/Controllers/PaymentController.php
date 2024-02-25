@@ -15,11 +15,13 @@ class PaymentController extends Controller
         $id_hidden = $request->id_hidden;
         $total = $request->total_hidden;        
         $total_all = $request->total;
+        $note = $request->note !== null ? $request->note : '';
         $bill_info = [
             "quantity_hidden"=>$quantity_hidden,
             "id_hidden"=>$id_hidden,
             "total_hidden"=>$total,
-            "total"=>$total_all
+            "total"=>$total_all,
+            "note"=>$note
         ];
          /** @disregard [OPTIONAL CODE] [OPTIONAL DESCRIPTION] */
         $request->session()->flash('bill_info',$bill_info);

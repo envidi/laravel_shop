@@ -66,7 +66,8 @@ class BillController extends Controller
             $quantity_hidden = $bill_info['quantity_hidden'];
             $id_hidden = $bill_info['id_hidden'];
             $total = $bill_info['total_hidden'];;            
-            $total_all = $bill_info['total'];;
+            $total_all = $bill_info['total'];
+            $note = $bill_info['note'];
             $cartSession = $request->session()->get('key');
             
             $data_bill = [
@@ -74,6 +75,7 @@ class BillController extends Controller
                 'total'=> $total_all,
                 'typeBank'=>'NCB',
                 'status'=>'Processing',
+                'note'=>$note,
                 'description'=>'This bill is paid',
                 'created_at'=>date('Y-m-d H:i:s')
             ];

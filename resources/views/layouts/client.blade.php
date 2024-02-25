@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="{{asset('assets/client/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/client/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('assets/client/css/cart.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/client/css/home.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('assets/client/css/phone.css')}}"> --}}
     <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+    <script src="https://unpkg.com/animejs@2.2.0/anime.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
     <title>Document</title>
 </head>
 <body>

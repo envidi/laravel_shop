@@ -50,17 +50,18 @@
               <div class="col-md-4 col-6 mb-3">
                 <label class="mb-2 d-block">Quantity</label>
                 <div class="input-group product_detail_contain_input mb-3" style="width: 170px;">
-                  <button class="btn btn-white border border-secondary px-3  decrement_product_detail" type="button" id="button-addon1" data-mdb-ripple-color="dark">
+                  <button class="btn btn-white border border-secondary px-3 decrement_product_detail" type="button" id="button-addon1" data-mdb-ripple-color="dark">
                     <i class="fas fa-minus decrement_product_detail_icon"></i>
+                  </button>
+                 
+                  <input type="number"  class="form-control text-center border border-secondary product_detail_input" name="quantity" value="1"  />
+                  <button class="btn btn-white border border-secondary px-3 increment_product_detail" type="button" id="button-addon2" data-mdb-ripple-color="dark">
+                    <i class="fas fa-plus increment_product_detail_icon"></i>
                   </button>
                   <input type="hidden" name="product_id" value="{{$singleProduct->id}}">
                   <input type="hidden" name="name" value="{{$singleProduct->name}}">
                   <input type="hidden" name="price" value="{{$singleProduct->price}}">                          
                   <input type="hidden" name="image" value="{{$singleProduct->image}}">
-                  <input type="number"  class="form-control text-center border border-secondary product_detail_input" name="quantity" value="1"  />
-                  <button class="btn btn-white border border-secondary px-3 increment_product_detail" type="button" id="button-addon2" data-mdb-ripple-color="dark">
-                    <i class="fas fa-plus increment_product_detail_icon"></i>
-                  </button>
                 </div>
               </div>
             </div>

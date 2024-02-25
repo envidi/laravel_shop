@@ -21,6 +21,12 @@ class Cart extends Model
                     ->get();
         return $list_cart_DB;
     }
+    public function getCartExistInDB($id_prod){
+        $list_cart_DB = DB::table($this->table)
+                    ->where('product_id', '=', $id_prod)
+                    ->get()->count();
+        return $list_cart_DB;
+    }
     public function deleteCartDb($id_bill){
         DB::table($this->table)->where('bill_id', '=', $id_bill)->delete();
     }
