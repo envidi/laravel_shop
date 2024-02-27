@@ -16,7 +16,9 @@ class CartController extends Controller
         $value = $request->session()->get('key');
         if(is_array($value)){
             $collection = new Collection($value);
-            $total_summary = $collection->sum('price');
+            $total_summary = $collection->sum(function ($item) {
+                return $item['price'] * $item['quantity'];
+            });
         }
         session(['cart' => $value]);
         return view('clients.cart', compact('value','total_summary'));
@@ -49,6 +51,25 @@ class CartController extends Controller
         $request->session()->push('key',$objectProduct);
         session(['cart' => $request->session()->get('key')]);
         return redirect()->route('cart');
+    }
+    public function confirmCart(Request $request)
+    {    
+        // dd($request->id_hidden);
+        $cartSession = $request->session()->has('key') ? $request->session()->get('key') :[];
+        $quantity = $request->quantity_hidden;
+        $total_price = $request->total_hidden;
+        $total_summary = $request->total;
+        foreach ($request->id_hidden as $key => $value) {
+            
+            $request->session()->put("key.{$key}.quantity",$quantity[$key]);
+            $request->session()->put("key.{$key}.total",$total_price[$key]);
+        }
+
+
+        // dd($request->session()->get('key'));
+        $value = $request->session()->get('key');
+        session(['cart' => $request->session()->get('key')]);
+        return view('clients.confirmCart', compact('value','total_summary'));
     }
     public function deleteFromCart(Request $request)
     {    

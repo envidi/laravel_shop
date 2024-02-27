@@ -1,12 +1,12 @@
 @extends('layouts.client')
 @section('content')
-    <div class="contain_cart">
-        <div class="cart_wrapper">
+    <div class="contain_cart ">
+        <div class="cart_wrapper my-5">
             <div class="row">
-                <div class="col-md-8 cart">
+                <div class="col-md-8 cart ">
                     <div class="title">
                         <div class="row">
-                            <div class="col"><h4><b>Shopping Cart </b></h4></div>
+                            <div class="col"><h4><b>Confirm Cart </b></h4></div>
                             <div class="col align-self-center text-right text-muted">{{ is_array($value) ? count($value): null}} items</div>
                         </div>
                     </div>   
@@ -20,20 +20,11 @@
                                 <div class="row">Cotton T-shirt</div>
                             </div>
                             <div class="col block_quantity" data-id="{{$key}}">
-                                <a class="decrement" href="#">-</a>
-                                <input type="text" value="{{$item['quantity']}}" name="quantity" class="input_quantity">
-                                <a class="increment" href="#">+</a>
+                                <input type="text" value="{{$item['quantity']}}" disabled name="quantity" class="input_quantity">
                             </div>
                             <div class="col d-flex align-items-center">&euro; 
                                 <input type="text" class="input_total" value="{{$item['total']}} "> 
-                                <form style="width: auto; display: flex; justify-content: center" action="{{route('deleteFromCart')}}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="index" value="{{$key}}">
-                                    
-                                    <button style="width: 50px" class="ms-5 btn" type="submit">
-                                        <span class="close ">&#10005;</span>
-                                    </button>
-                                </form>
+                               
                                 
                             </div>
                         </div>
@@ -49,24 +40,31 @@
                     <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
                 </div>
                 <div class="col-md-4 summary">
-                    <div><h5 class="h5_cart"><b>Summary</b></h5></div>
+                    <div><h5 class="h5_cart"><b>User Information</b></h5></div>
                     <hr>
                     <div class="row">
-                        <div class="col" style="padding-left:0;">ITEMS {{ is_array($value) ? count($value): null}}</div>                        
-                        &euro;<input type="text" class="col  summary_total" value="{{$total_summary}}">
+                        <div class="col" style="padding-left:0;">Name </div>  
+                        <input type="text" class="col  summary_total" value="Envidi">
                     </div>
+                    <div class="row">
+                        <div class="col" style="padding-left:0;">Phone </div>  
+                        <input type="text" class="col  summary_total" value="098765432">
+                    </div>
+                    @if (is_array($value))
+                    <form action="{{route('create_payment')}}" method="POST">
                     <div class="form_cart">
-                        <p>SHIPPING</p>
-                        <select style="font-size: 15px" class="select_cart"><option  class="text-muted">Standard-Delivery- &euro;5.00</option></select>
-                        <p>GIVE CODE</p>
-                        <input class="input_cart" id="code" placeholder="Enter your code">
+                        <p>Address</p>
+                        <span class="address_cart ">
+                            Ha Noi Thanh Xuan
+                        </span>
+                        <p class="note_cart">Note</p>
+                        <input class="input_cart" id="code" name="note" placeholder="Enter your note">
                     </div>
                     <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                         <div class="col">TOTAL PRICE</div>
-                        &euro;<input type="text" class="col  summary_total_all" value="{{$total_summary}}">
+                        &euro;<input type="text" class=" summary_total_all" value="{{$total_summary}}">
                     </div>
-                    @if (is_array($value))
-                    <form action="{{route('confirm_cart')}}" method="POST">
+                                       
                         @csrf
                         @foreach ($value as $key => $item)
                             <input type="hidden" name="quantity_hidden[]" class="quantity_hidden" value="{{$item['quantity']}}">

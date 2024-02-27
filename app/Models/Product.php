@@ -50,6 +50,17 @@ class Product extends Model
 
         return $productDetail;
     }
+    public function searchProductDB($key)
+    {
+        $productDetail = DB::table($this->table)
+        ->select('products.*', 'categories.name as category_name')
+        ->join('categories', 'products.category_id', '=', 'categories.id')
+        ->where('products.name', 'like', "%$key%")
+        ->whereNull('deleted_at')
+        ->get();
+
+        return $productDetail;
+    }
     public function getSingleProduct($id)
     {
         $productDetail = DB::table($this->table)->select('products.*', 'categories.name as category_name')->where('products.id', '=', $id)->join('categories', 'products.category_id', '=', 'categories.id')->get();

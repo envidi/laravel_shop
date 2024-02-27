@@ -3,7 +3,7 @@
 
 @endphp
 <header>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg shadow-sm bg-white">
         <div class="container-fluid d-flex justify-content-sm-between">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav  mb-2 mb-lg-0">
@@ -11,7 +11,7 @@
                         <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('products.list') }}">Product</a>
+                        <a class="nav-link" href="{{ route('product_page') }}">Product</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('categories.list') }}">Category</a>
@@ -19,9 +19,9 @@
 
 
                 </ul>
-                <form class="d-flex" style="margin-left: 150px" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                <form class="d-flex" style="margin-left: 150px" method="GET" action="{{route('product_page')}}" role="search">
+                    <input class="form-control me-2" type="search" name="key" placeholder="Search" aria-label="Search">
+                    <button type="submit" class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
             <div class="contain_user_cart">

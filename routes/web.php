@@ -24,6 +24,7 @@ use App\Http\Controllers\UsersController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/product_page', [HomeController::class, 'productPage'])->name('product_page');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/bill', [BillController::class, 'addToBillAndCart'])->name('addBill');
 Route::post('/bill_cancle/{id}', [BillController::class, 'cancleBill'])->name('cancleBill');
@@ -31,7 +32,9 @@ Route::get('/bill_delete/{id}', [BillController::class, 'deleteBill'])->name('de
 Route::get('/bill_list', [BillController::class, 'getBill'])->name('bill_list');
 Route::post('/cart', [CartController::class, 'addToCart'])->name('addToCart');
 Route::post('/cart_delete', [CartController::class, 'deleteFromCart'])->name('deleteFromCart');
+Route::post('/confirm_cart', [CartController::class, 'confirmCart'])->name('confirm_cart');
 Route::post('/create_payment', [PaymentController::class, 'create_payment'])->name('create_payment');
+
 Route::get('/productDetail/{id}', [ProductController::class, 'getProductById'])->name('product_detail');
 
 // Products
@@ -72,6 +75,12 @@ Route::prefix('admin')->group(function () {
     Route::post('/products/edit/{id}', [ProductController::class, 'handleEditProduct'])->name('products.handleEdit');
     Route::get('/products/{id}', [ProductController::class, 'handleDeleteProduct'])->name('products.handleDelete');
     Route::get('/products/remove/{id}', [ProductController::class, 'handleRemoveProduct'])->name('products.hardDelete');
+
+    Route::get('/category', [CategoryController::class, 'index'])->name('admin.categories.list');
+    Route::get('/category/add', [CategoryController::class, 'addCategory'])->name('admin.categories.add');
+    Route::post('/category/add', [CategoryController::class, 'handleAddCategory'])->name('admin.handleAddCategory');
+    Route::get('/category/edit/{id}', [CategoryController::class, 'editCategory'])->name('admin.categories.edit');
+    Route::post('/category/edit/{id}', [CategoryController::class, 'handleEditCategory'])->name('admin.categories.handleEdit');
 
     Route::get('/users', [UsersController::class, 'index'])->name('admin.users');
     Route::get('/users/add', [UsersController::class, 'addUser'])->name('users.add');
