@@ -1,59 +1,65 @@
-.content{
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+.content {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
-.form-add{
+.form-add {
     width: 700px;
     display: flex;
     flex-direction: column;
-    
 }
-.form_submit-btn{
+.form_submit-btn {
     width: 100px;
 }
-.contain-btn{
+.contain-btn {
     display: flex;
     gap: 10px;
-    
 }
-.title-list{
+.title-list {
     margin-top: 20px;
 }
-.image_home{
+.image_home {
     width: 100%;
 }
-.contain-image_home{
+.contain-image_home {
     overflow: hidden;
 }
-.contain_user_cart{
+.contain_user_cart {
     width: 150px;
     display: flex;
 }
-.badge:after{
-    content:attr(value);
-    font-size:12px;
+.badge:after {
+    content: attr(value);
+    font-size: 12px;
     color: #fff;
     background: red;
-    border-radius:50%;
+    border-radius: 50%;
     padding: 0 5px;
-    position:relative;
-    left:-8px;
-    top:-10px;
-    opacity:0.9;
+    position: relative;
+    left: -8px;
+    top: -10px;
+    opacity: 0.9;
 }
-.icon_cart{
+.icon_cart {
     color: black;
 }
-.cart_icon_wrapper{
+.cart_icon_wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 3px;
 }
-.contain_bill_list{
+.contain_bill_list {
     width: 100%;
     padding: 10px 20px;
     align-items: flex-start;
@@ -61,34 +67,35 @@
     margin: 20px 0;
     border-bottom: 1px solid rgb(220, 220, 220);
 }
-.title_bill{
+.title_bill {
     margin-top: 20px;
 }
-.info_bill{
+.info_bill {
     /* margin: 10px 0; */
     flex-grow: 1;
     width: fit-content;
-    background-color:antiquewhite;
+    background-color: antiquewhite;
     padding: 10px 30px;
 }
-.bill_info_user{
+.bill_info_user {
     font-weight: 500;
 }
-.block_bill{
+.block_bill {
     margin: 10px 0;
 }
-.table_bill{
+.table_bill {
     border-collapse: collapse;
     flex-grow: 4;
     background-color: rgb(245, 245, 245);
     border-radius: 10px;
     overflow: hidden;
 }
-.table_bill th, td{
+.table_bill th,
+td {
     border-top: 1px solid rgb(198, 198, 198);
     padding: 10px 0;
     padding-left: 10px;
 }
-.table_bill tr:last-child{
+.table_bill tr:last-child {
     border-bottom: 1px solid rgb(198, 198, 198);
 }

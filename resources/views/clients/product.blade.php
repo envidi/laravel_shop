@@ -26,7 +26,7 @@
                     <button type="button" class="btn btn-secondary mb-3">{{$product->category_name}}</button>
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-outline-primary" >{{$product->price}}</button>
+                        <button type="button" class="btn btn-outline-primary" >&euro;{{$product->price}}</button>
                       </div>
                       
                       <small class="text-body-secondary">{{$product->created_at}}</small>

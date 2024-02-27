@@ -141,14 +141,8 @@ class ProductController extends Controller
     public function handleDeleteProduct($id = 0)
     {
         if (!empty($id)) {
-            $existCart = $this->cart->getCartExistInDB($id);
-            if($existCart === 0 ){
                 $data = Product::find($id);
                 $data->delete();
-            }else{
-                return redirect()->route('products.list')->with('msg', 'Cannot delete product!');
-            }
-            
             
         } else {
             $msg = 'This link is not exist';

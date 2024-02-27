@@ -25,7 +25,7 @@
             
   
             <div class="mb-3">
-              <span class="h5">Price : {{$singleProduct->price}} VND</span>
+              <span class="h5">Price : &euro;{{$singleProduct->price}}</span>
               
             </div>
   

@@ -57,7 +57,7 @@
                     </div>
                     <div class="form_cart">
                         <p>SHIPPING</p>
-                        <select class="select_cart"><option class="text-muted">Standard-Delivery- &euro;5.00</option></select>
+                        <select style="font-size: 15px" class="select_cart"><option  class="text-muted">Standard-Delivery- &euro;5.00</option></select>
                         <p>GIVE CODE</p>
                         <input class="input_cart" id="code" placeholder="Enter your code">
                     </div>

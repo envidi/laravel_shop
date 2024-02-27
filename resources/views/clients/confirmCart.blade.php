@@ -1,9 +1,9 @@
 @extends('layouts.client')
 @section('content')
-    <div class="contain_cart">
-        <div class="cart_wrapper">
+    <div class="contain_cart ">
+        <div class="cart_wrapper my-5">
             <div class="row">
-                <div class="col-md-8 cart">
+                <div class="col-md-8 cart ">
                     <div class="title">
                         <div class="row">
                             <div class="col"><h4><b>Confirm Cart </b></h4></div>

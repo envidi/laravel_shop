@@ -16,7 +16,9 @@ class CartController extends Controller
         $value = $request->session()->get('key');
         if(is_array($value)){
             $collection = new Collection($value);
-            $total_summary = $collection->sum('price');
+            $total_summary = $collection->sum(function ($item) {
+                return $item['price'] * $item['quantity'];
+            });
         }
         session(['cart' => $value]);
         return view('clients.cart', compact('value','total_summary'));
