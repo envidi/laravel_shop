@@ -6,8 +6,8 @@
                 <div class="col-md-8 cart">
                     <div class="title">
                         <div class="row">
-                            <div class="col"><h4><b>Shopping Cart {{ is_array($value) ? count($value): null}}</b></h4></div>
-                            <div class="col align-self-center text-right text-muted">3 items</div>
+                            <div class="col"><h4><b>Shopping Cart </b></h4></div>
+                            <div class="col align-self-center text-right text-muted">{{ is_array($value) ? count($value): null}} items</div>
                         </div>
                     </div>   
                     @if (is_array($value))
@@ -52,21 +52,21 @@
                     <div><h5 class="h5_cart"><b>Summary</b></h5></div>
                     <hr>
                     <div class="row">
-                        <div class="col" style="padding-left:0;">ITEMS 3</div>                        
-                        &euro;<input type="text" class="col text-right summary_total" value="{{$total_summary}}">
+                        <div class="col" style="padding-left:0;">ITEMS {{ is_array($value) ? count($value): null}}</div>                        
+                        &euro;<input type="text" class="col  summary_total" value="{{$total_summary}}">
                     </div>
                     <div class="form_cart">
                         <p>SHIPPING</p>
-                        <select class="select_cart"><option class="text-muted">Standard-Delivery- &euro;5.00</option></select>
+                        <select style="font-size: 15px" class="select_cart"><option  class="text-muted">Standard-Delivery- &euro;5.00</option></select>
                         <p>GIVE CODE</p>
                         <input class="input_cart" id="code" placeholder="Enter your code">
                     </div>
                     <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                         <div class="col">TOTAL PRICE</div>
-                        &euro;<input type="text" class="col text-right summary_total_all" value="{{$total_summary}}">
+                        &euro;<input type="text" class="col  summary_total_all" value="{{$total_summary}}">
                     </div>
                     @if (is_array($value))
-                    <form action="{{route('create_payment')}}" method="POST">
+                    <form action="{{route('confirm_cart')}}" method="POST">
                         @csrf
                         @foreach ($value as $key => $item)
                             <input type="hidden" name="quantity_hidden[]" class="quantity_hidden" value="{{$item['quantity']}}">

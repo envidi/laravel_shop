@@ -20,13 +20,13 @@ class CategoryController extends Controller
     {   
         $categoryList = $this->categories->getAllCategories();
         
-        return view('clients.homeListCategory',compact('categoryList'));
+        return view('admin.Category.categoryList',compact('categoryList'));
     }
 
     public function addCategory()
     {
         
-        return view('clients.homeAddCategory');
+        return view('admin.Category.categoryAdd');
     }
     public function handleAddCategory(Request $request)
     {
@@ -60,7 +60,7 @@ class CategoryController extends Controller
         }else{
             return redirect()->route('categories.list')->with('msg','Liên kết không tồn tại');
         }
-        return view('clients.homeEditCategory',compact('categoryDetail') );
+        return view('admin.Category.categoryEdit',compact('categoryDetail') );
     }
     public function handleEditCategory(Request $request, $id=0){
         $request->validate([
@@ -77,7 +77,7 @@ class CategoryController extends Controller
         
         $this->categories->updateCategory($dataUpdate,$id);
 
-        return  redirect()->route('categories.edit',['id'=>$id])->with('msg','Update successfully');
+        return  redirect()->route('admin.categories.edit',['id'=>$id])->with('msg','Update successfully');
     }
     public function handleDeleteCategory($id=0){
         

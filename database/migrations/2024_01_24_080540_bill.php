@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('typeBank');
             $table->string('status');
             $table->string('description');
+            $table->string('note');
             $table->timestamps();
         });
     }

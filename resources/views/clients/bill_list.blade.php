@@ -7,18 +7,28 @@
 
         <div class="info_bill">
             <div class="info_user block_bill">
-                <span class="bill_info_user">Tên khách hàng</span> : {{$item['user_id']}}
+                <span class="bill_info_user">Name customer</span> : {{$item['user_id']}}
             </div>
             <div class="bank block_bill"><span class="bill_info_user">Ngân hàng </span>: {{$item['typeBank']}}</div>
             <div class="status block_bill">
-                <span class="bill_info_user">Trạng thái </span>: {{$item['status']}}
+                <span class="bill_info_user">Status </span>: {{$item['status']}}
             </div>
             <div class="description block_bill">
                 <span class="bill_info_user">Description </span>: {{$item['description']}}
             </div>
             <div class="date_bill block_bill">
-                <span class="bill_info_user">Ngày thanh toán </span>: {{$item['created_at']}}
+                <span class="bill_info_user">Date </span>: {{$item['created_at']}}
             </div>
+            <div class="date_bill block_bill">
+                <span class="bill_info_user">Note </span>: {{$item['note']}}
+            </div>
+            <form action="{{route('cancleBill',['id'=>$item['id']])}}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger">
+                    Cancle
+                </button>
+            </form>
+            
         </div>
         <table class="table_bill">
             <thead>

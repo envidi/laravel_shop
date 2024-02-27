@@ -24,6 +24,39 @@ class BillController extends Controller
         }
         return view('clients.bill_list',compact('bill_user'));
     }
+    public function getAllBill(Request $request){
+        $bill_all = $this->bill->getAllBillDB();
+        foreach ($bill_all as $key => $value) {
+            $cartFromBill = $this->cart->listCartDB($value['id'])->toArray();
+            $bill_all[$key]['cartList'] = $cartFromBill;
+        }
+        // dd($bill_all);
+        return view('admin.cart.cartList',compact('bill_all'));
+    }
+    public function editBill($id = 0){
+        $bill_single = $this->bill->getSingleBillDB($id)[0];
+        
+        $array_status = ['Processing','Completed','Cancle'];        
+        return view('admin.cart.cartEdit',compact('bill_single','array_status'));
+    }
+    public function handleEditBill(Request $request){
+        
+        $bill_single = $this->bill->updateStatusBill($request->status, $request->id);
+        
+              
+        return redirect()->route('order.list')->with('msg', 'Cập nhật đơn hàng thành công');
+    }
+    public function cancleBill(Request $request){
+        $this->bill->updateStatusBill('Cancle', $request->id);
+        
+        return redirect()->route('bill_list')->with('msg', 'Hủy đơn hàng thành công');
+    }
+    public function deleteBill($id){
+        $this->cart->deleteCartDb($id);
+        $this->bill->deleteBillDB($id);
+        return redirect()->route('order.list')->with('msg', 'Xóa đơn hàng thành công');
+    }
+    
     public function addToBillAndCart(Request $request)
     {   
         if($request->query('vnp_ResponseCode') == "00"){
@@ -33,7 +66,8 @@ class BillController extends Controller
             $quantity_hidden = $bill_info['quantity_hidden'];
             $id_hidden = $bill_info['id_hidden'];
             $total = $bill_info['total_hidden'];;            
-            $total_all = $bill_info['total'];;
+            $total_all = $bill_info['total'];
+            $note = $bill_info['note'];
             $cartSession = $request->session()->get('key');
             
             $data_bill = [
@@ -41,6 +75,7 @@ class BillController extends Controller
                 'total'=> $total_all,
                 'typeBank'=>'NCB',
                 'status'=>'Processing',
+                'note'=>$note,
                 'description'=>'This bill is paid',
                 'created_at'=>date('Y-m-d H:i:s')
             ];
